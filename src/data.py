@@ -141,3 +141,17 @@ def add_missing_slots(ts_data: pd.DataFrame) -> pd.DataFrame:
     output = output.reset_index().rename(columns={'index': 'pickup_hour'})
 
     return output
+
+def transform_raw_data_into_ts_data(
+    rides: pd.DataFrame
+) -> pd.DataFrame:
+    """"""
+    # sum rides per location and pickup_hour
+    rides['pickup_hour'] = rides['pickup_datetime'].dt.floor('H')
+    agg_rides = rides.groupby(['pickup_hour', 'pickup_location_id']).size().reset_index()
+    agg_rides.rename(columns={0: 'rides'}, inplace=True)
+
+    # add rows for (locations, pickup_hours)s with 0 rides
+    agg_rides_all_slots = add_missing_slots(agg_rides)
+
+    return agg_rides_all_slots
