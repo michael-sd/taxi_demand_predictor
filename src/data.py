@@ -66,18 +66,17 @@ def load_raw_data(
         months = [months]
 
     for month in months:
-
-        local_file = RAW_DATA_DIR / f'rides_{year}-{month:02d}.parquet'
+        local_file = RAW_DATA_DIR / f'rides_{year}_{month:02d}.parquet'
         if not local_file.exists():
             try:
                 # download the file from the NYC website
-                print(f'Downloading file {year}-{month:02d}')
+                print(f'Downloading file {year}_{month:02d}')
                 download_one_file_of_raw_data(year, month)
             except:
-                print(f'{year}-{month:02d} file is not available')
+                print(f'{year}_{month:02d} file is not available')
                 continue
         else:
-            print(f'File {year}-{month:02d} was already in local storage')
+            print(f'File {year}_{month:02d} was already in local storage')
 
         # load the file into Pandas
         rides_one_month = pd.read_parquet(local_file)
