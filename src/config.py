@@ -29,8 +29,8 @@ FEATURE_GROUP_VERSION = 1
 # )
 
 # # TODO: remove FEATURE_VIEW_NAME and FEATURE_VIEW_VERSION, and use FEATURE_VIEW_METADATA instead
-# FEATURE_VIEW_NAME = 'time_series_hourly_feature_view'
-# FEATURE_VIEW_VERSION = 1
+FEATURE_VIEW_NAME = 'time_series_hourly_feature_view'
+FEATURE_VIEW_VERSION = 1
 # FEATURE_VIEW_METADATA = FeatureViewConfig(
 #     name='time_series_hourly_feature_view',
 #     version=1,
