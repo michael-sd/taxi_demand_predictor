@@ -9,9 +9,15 @@ def train_test_split(
     cutoff_date: datetime,
     target_column_name: str,
 ) -> Tuple[pd.DataFrame, pd.Series, pd.DataFrame, pd.Series]:
-    """ """
-    train_data = df[df.pickup_hour < cutoff_date].reset_index(drop=True)
-    test_data = df[df.pickup_hour >= cutoff_date].reset_index(drop=True)
+    """Split data into train and test sets based on a cutoff date"""
+    # First, ensure pickup_hour is in datetime format
+    df_copy = df.copy()
+    if df_copy['pickup_hour'].dtype == 'object':  # If it's a string
+        df_copy['pickup_hour'] = pd.to_datetime(df_copy['pickup_hour'])
+
+    # Now perform the split
+    train_data = df_copy[df_copy.pickup_hour < cutoff_date].reset_index(drop=True)
+    test_data = df_copy[df_copy.pickup_hour >= cutoff_date].reset_index(drop=True)
 
     X_train = train_data.drop(columns=[target_column_name])
     y_train = train_data[target_column_name]
