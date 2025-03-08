@@ -19,6 +19,8 @@ lightgbm = "^4.5.0"
 optuna = "^4.2.0"
 dotenv = "^0.9.9"
 hopsworks = "^4.1.8"
+streamlit = "^1.43.1"
+geopandas = "^1.0.1"
 
 
 [build-system]
